@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}Ilmoituksen muokkaus{% endblock %}
+
+{% block content %}
+<h2>
+    {{ item.title }}
+</h2>
+<h3>Ilmoituksen muokkaus</h3>
+
+<form action="/edit_item" enctype="multipart/form-data" method="post">
+
+    <div>
+        <p>Otsikko</p>
+        <input type="text" name="title" id="title" value="{{ item.title }}" maxlength="50" required />
+    </div>
+
+    <div>
+        <p>Kuvaus</p>
+        <textarea name="desc" id="desc" rows="8" cols="60" maxlength="1000" required>{{ item.desc }}</textarea>
+    </div>
+
+    <div>
+        <p>Hinta</p>
+        <input type="text" name="price" id="price" value="{{ item.price }}" size="8" pattern="[1-9][0-9]{0,3}" required /><span>€</span>
+    </div>
+
+    <div>
+        <p>Kuva</p>
+        <img src="/image/{{ item.id }}" width="100px">
+        <input type="file" id="image" name="image" accept="image/png">
+    </div>
+
+    <div>
+        <p>Osasto</p>
+        <select name="category" id="category">
+            {% for c in category %}
+            {% if c == item.category %}
+            <option value="{{ c }}" selected>
+                {{ c }}
+            </option>
+            {% else %}
+            <option value="{{ c }}">
+                {{ c }}
+            </option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <p>Kunto</p>
+        <select name="condition" id="condition">
+            {% for c in condition %}
+            {% if c == item.category %}
+            <option value="{{ c }}" selected>
+                {{ c }}
+            </option>
+            {% else %}
+            <option value="{{ c }}">
+                {{ c }}
+            </option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <input type="hidden" name="item_id" value="{{ item.id }}" />
+   
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    <input type="submit" value="Päivitä ilmoitusta" />
+</form>
+<p>
+    <a href="/item/{{ item.id }}">Takaisin ilmoitukseen</a>
+</p>
+{% endblock %}

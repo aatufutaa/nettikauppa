@@ -1,0 +1,15 @@
+<div class="item">
+    <img src="/image/{{ item.id }}" width="100px">
+    <div class="text">
+        <a href="/item/{{ item.id }}">
+            {{ item.title }}</a>
+        <p>Osasto:
+            {{ category[item.category] }}
+        </p>
+        <p>Kunto:
+            {{ condition[item.condition] }}
+        </p>
+        <p>Ilmoittaja: <a href="/user/{{ item.user_id }}">
+                {{ item.username }}</a></p>
+    </div>
+</div>

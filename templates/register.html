@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}Kirjaudu sisään{% endblock %}
+
+{% block content %}
+<h2>Luo tunnus</h2>
+
+<form action="/register" method="post">
+  <div>
+    <p>Käyttäjätunnus</p>
+    <input type="text" name="username" id="username" />
+  </div>
+  <div>
+    <p>Salasana</p>
+    <input type="password" name="password1" id="password1" />
+  </div>
+  <div>
+    <p>Salasana uudelleen</p>
+    <input type="password" name="password2" id="password2" />
+  </div>
+  <input type="submit" value="Luo tunnus" />
+</form>
+{% endblock %}

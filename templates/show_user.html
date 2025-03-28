@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Käyttäjä
+
+{{ user.username }}{% endblock %}
+
+{% block content %}
+<h2>Käyttäjä
+    {{ user.username }}
+</h2>
+<p>
+    Käyttäjällä on yhteensä
+    {{ items | count }} ilmoitusta.
+</p>
+<h3>Ilmoitukset</h3>
+
+{% if items %}
+{% for item in items %}
+{% include "item_display.html" %}
+{% endfor %}
+{% else %}
+<p>Käyttäjällä ei ole ilmoituksia.</p>
+{% endif %}
+{% endblock %}

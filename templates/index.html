@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Huutokauppa{% endblock %}
+
+{% block content %}
+<h2>Ilmoitukset</h2>
+
+{% if items %}
+{% for item in items %}
+{% include "item_display.html" %}
+{% endfor %}
+{% else %}
+<p>Ei näytettäviä ilmoitksia</p>
+{% endif %}
+{% endblock %}

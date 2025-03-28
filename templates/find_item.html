@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}Etsi ilmoitus{% endblock %}
+
+{% block content %}
+<h2>Etsi ilmoitus</h2>
+<form action="/find_item" method="get">
+    <div>
+        <p>Hakusana</p>
+        <input type="text" name="query" id="query" value="{{ query }}">
+    </div>
+    <input type="submit" value="Lähetä">
+</form>
+
+{% if query %}
+  <h3>Tulokset</h3>
+    {% if results %}
+      {% for item in results %}
+      {% include "item_display.html" %}
+      {% endfor %}
+    {% else %}
+      <p>Hakua vastaavia ilmoituksia ei löytynyt.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}
