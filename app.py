@@ -59,7 +59,8 @@ def item_get(item_id):
     item = items.get_item(item_id)
     if not item:
         abort(404)
-    return render_template("show_item.html", item=item)
+    comments = items.get_comments(item_id)
+    return render_template("show_item.html", item=item, comments=comments)
 
 @app.route("/image/<int:item_id>")
 def image_get(item_id):
@@ -239,3 +240,23 @@ def logout_get():
         del session["user_id"]
         del session["username"]
     return redirect("/")
+
+@app.route("/comment", methods=["POST"])
+def comment_post():
+    require_login()
+    check_csrf()
+
+    item_id = request.form["item_id"]
+    item = items.get_item(item_id)
+    if not item:
+        abort(404)
+    if item["user_id"] != session["user_id"]:
+        abort(403)
+
+    comment = request.form["comment"]
+    if not comment or len(comment) > 1000:
+        abort(403)
+
+    items.add_comment(item["user_id"], item_id, comment)
+
+    return redirect("/item/" + str(item_id))

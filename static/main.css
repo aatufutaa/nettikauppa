@@ -47,3 +47,8 @@ input, textarea, select {
   padding: 8px;
   background-color: red;
 }
+
+.comments {
+  border: 2px solid black;
+  margin: 4px;
+}

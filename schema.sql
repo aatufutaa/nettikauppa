@@ -10,8 +10,8 @@ CREATE TABLE items (
     desc TEXT,
     price INTEGER,
     image BLOB,
-    category TEXT,
-    condition TEXT,
+    category INTEGER,
+    condition INTEGER,
     user_id INTEGER REFERENCES users
 );
 
@@ -21,6 +21,14 @@ CREATE TABLE category (
 
 CREATE TABLE condition (
     name TEXT UNIQUE
+);
+
+CREATE TABLE comments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES users,
+    item_id INTEGER REFERENCES items,
+    comment TEXT,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO category (name) VALUES ("autot");

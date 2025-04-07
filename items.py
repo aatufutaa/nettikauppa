@@ -51,3 +51,19 @@ def get_category_list():
 def get_condition_list():
     sql = "SELECT * FROM condition"
     return [row[0] for row in db.query(sql)]
+
+def add_comment(user_id, item_id, comment):
+    sql = """INSERT INTO comments (user_id, item_id, comment)
+             VALUES (?, ?, ?)"""
+    db.execute(sql, [user_id, item_id, comment])
+
+    item_id = db.last_insert_id()
+    return item_id
+
+def get_comments(item_id):
+    sql = """SELECT comments.*, users.username
+        FROM comments
+        JOIN users ON comments.user_id = users.id
+        WHERE comments.item_id = ?
+        ORDER BY comments.date"""
+    return db.query(sql, [item_id])
