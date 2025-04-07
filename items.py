@@ -43,3 +43,11 @@ def find_items(query):
              ORDER BY id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like])
+
+def get_category_list():
+    sql = "SELECT * FROM category"
+    return [row[0] for row in db.query(sql)]
+
+def get_condition_list():
+    sql = "SELECT * FROM condition"
+    return [row[0] for row in db.query(sql)]

@@ -12,8 +12,8 @@ import users
 app = Flask(__name__)
 app.secret_key = "1234"
 
-category = ["autot", "elektroniikka", "vaatteet", "huonekalut", "lelut"]
-condition = ["erinomainen", "hyvä", "kohtalainen", "huono"]
+category = items.get_category_list()
+condition = items.get_condition_list()
 
 def require_login():
     if "user_id" not in session:
